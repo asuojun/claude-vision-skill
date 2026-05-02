@@ -21,15 +21,14 @@
 
 1. 把这个仓库里的 `vision.js` 下载到项目根目录
 2. 替换 `vision.js` 里的 `sk-xxx` → 用户的 Key，`xxx` → 模型名。如果用的不是千问，同步改 `BASE_URL`
-3. 把 `vision.md` 放到 `.claude/skills/vision.md`
-4. 把 `CLAUDE.md` 的内容合并到项目的 `CLAUDE.md`（没有就新建）
-5. 告诉用户：搞定，以后遇到图片自动识图，也支持 `/vision 图片路径`
+3. 把 `CLAUDE.md` 的内容合并到项目的 `CLAUDE.md`（没有就新建）
+4. 告诉用户：配置完成，以后直接发图片就行，AI 会自动识图
 
 ### 场景 B：用户要在 cyberboss 里用
 
 1. 先执行场景 A 的所有步骤
-2. 接着读这个仓库里的 `cyberboss-setup.md`，按它说的改 `src/core/app.js`
-3. 告诉用户：重启 cyberboss 后生效
+2. 接着读这个仓库里的 `cyberboss-setup.md`，按它说的改 persona 和 `src/core/app.js`
+3. 告诉用户：重启 cyberboss 后生效，微信里直接发图片就能识图
 
 ### 场景 C：用户只想了解这是什么
 
@@ -37,6 +36,7 @@
 - `vision.js` 是核心，读取图片 → base64 → 发给 vision 模型 API → 返回文字描述
 - 走 OpenAI 兼容格式，不绑定特定厂商
 - 推荐千问是因为有免费额度；有别的便宜 vision API 也能用
+- 配置好之后，用户直接发图片，AI 自动处理，无需手动打命令
 
 ---
 
@@ -44,7 +44,7 @@
 
 ### 这是什么
 
-一个让 DeepSeek 等无 vision 能力的模型也能"看图"的脚本。
+一个让 DeepSeek 等无 vision 能力的模型也能"看图"的脚本。配置好之后，直接发图片 AI 就会自动识别。
 
 ### 推荐识图服务
 
@@ -77,14 +77,12 @@ AI 会问你用什么服务、Key 是什么，然后自动配好。
 
 1. 把 `vision.js` 拷到项目里
 2. 打开 `vision.js`，填 API Key、模型名（如用非千问服务还需改 API 地址）
-3. 把 `vision.md` 放到 `.claude/skills/`
-4. 把 `CLAUDE.md` 放到项目根目录
+3. 把 `CLAUDE.md` 放到项目根目录
 
 ### 文件说明
 
 | 文件 | 用途 |
 |------|------|
 | `vision.js` | 核心脚本，OpenAI 兼容格式 |
-| `vision.md` | Skill 文件，放到 `.claude/skills/` |
-| `CLAUDE.md` | 项目说明书 |
+| `CLAUDE.md` | 项目说明书，告诉 AI 何时用 vision.js |
 | `cyberboss-setup.md` | cyberboss 自动配置指令 |

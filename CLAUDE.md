@@ -12,12 +12,6 @@ node vision.js "<图片路径>" "用中文描述这张图片"
 - 消息中出现 "Saved attachments:" 并列出图片
 - 用户要求分析、描述、识别图片内容
 
-## 前置条件
+## 配置好之后
 
-- `DASHSCOPE_API_KEY` 已设为环境变量或 .env 文件
-- 获取 Key: https://bailian.console.aliyun.com/
-- 计费: 按量付费 ~¥0.02/次
-
-## 也支持手动调用
-
-输入 `/vision <图片路径>` 来手动触发识图。
+用户直接发图片，自动识图，无需手动打命令。
