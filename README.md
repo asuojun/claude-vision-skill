@@ -6,33 +6,37 @@
 
 ## 如果你是 AI（Claude Code），请读这里
 
-用户把这个链接发给你，是想让你帮他配置识图。按以下流程走。
+用户把这个链接发给你，是想让你帮他配置识图。先确认信息，再按场景执行。
 
-### 第一步：确认信息
+### 先确认
 
 问用户：
 1. 想用哪个识图服务？
-   - **推荐千问**（`qwen3.5-omni-plus` 或 `qwen-vl-max`）：阿里云百炼，新用户 100 万 token 免费，约 0.02 元/次
-   - 也可以用其他支持 OpenAI 兼容格式的 vision 模型（GPT-4o、Claude 等），只需改 API 地址和模型名
-2. API Key 是什么？（没申请的话引导用户去对应平台注册）
-3. （可选）API Base URL，默认千问的 `https://dashscope.aliyuncs.com/compatible-mode/v1`
+   - **推荐千问**（`qwen3.5-omni-plus` / `qwen-vl-max`）：阿里云百炼，新用户 100 万 token 免费，约 0.02 元/次
+   - 也可以用 OpenAI（`gpt-4o-mini`）或其他支持 OpenAI 兼容格式的 vision 模型
+2. API Key 是什么？没申请的话引导去对应平台注册
+3. （如果用非千问服务）API Base URL 是什么？
 
-### 第二步：配置
+### 场景 A：用户要在普通 Claude Code 项目里用
 
 1. 把这个仓库里的 `vision.js` 下载到项目根目录
-2. 在 `vision.js` 里替换：
-   - `sk-xxx` → 用户的 API Key
-   - `xxx` → 模型名（默认千问，用户选别的就改）
-   - 如果用的不是千问，还要改 `BASE_URL` 那行的默认值
+2. 替换 `vision.js` 里的 `sk-xxx` → 用户的 Key，`xxx` → 模型名。如果用的不是千问，同步改 `BASE_URL`
 3. 把 `vision.md` 放到 `.claude/skills/vision.md`
-4. 把 `CLAUDE.md` 的内容合并到项目已有的 `CLAUDE.md`（没有就新建）
+4. 把 `CLAUDE.md` 的内容合并到项目的 `CLAUDE.md`（没有就新建）
+5. 告诉用户：搞定，以后遇到图片自动识图，也支持 `/vision 图片路径`
 
-### 第三步：告知用户
+### 场景 B：用户要在 cyberboss 里用
 
-告诉用户配置完成，以后：
-- 对话中提到图片路径会自动调 vision.js
-- 也可以手动 `/vision <图片路径>`
-- 如果用户还要配 cyberboss，读这个仓库的 `cyberboss-setup.md` 继续
+1. 先执行场景 A 的所有步骤
+2. 接着读这个仓库里的 `cyberboss-setup.md`，按它说的改 `src/core/app.js`
+3. 告诉用户：重启 cyberboss 后生效
+
+### 场景 C：用户只想了解这是什么
+
+简要解释：
+- `vision.js` 是核心，读取图片 → base64 → 发给 vision 模型 API → 返回文字描述
+- 走 OpenAI 兼容格式，不绑定特定厂商
+- 推荐千问是因为有免费额度；有别的便宜 vision API 也能用
 
 ---
 
@@ -41,7 +45,6 @@
 ### 这是什么
 
 一个让 DeepSeek 等无 vision 能力的模型也能"看图"的脚本。
-原理：图片 → base64 → 发给有 vision 的模型 API → 返回文字描述。
 
 ### 推荐识图服务
 
@@ -52,26 +55,20 @@
 | OpenAI | `gpt-4o-mini` | ~$0.00015/次 | 需海外支付 |
 | 其他 | 任何 OpenAI 兼容格式 | 各异 | 改 `BASE_URL` 和模型名即可 |
 
-如果你有其他便宜或免费的 vision API，也可以用它——`vision.js` 走的是 OpenAI 兼容格式，兼容性很广。
-
 ### 自动配置
 
 把这个 GitHub 链接发给 Claude Code，说一句：
 
 > 按这个 README 帮我配置识图
 
-AI 会自动帮你搞定。
+AI 会问你用什么服务、Key 是什么，然后自动配好。
 
 ### 手动配置
 
 1. 把 `vision.js` 拷到项目里
-2. 打开 `vision.js`，改 API Key、模型名（如需改 API 地址）
+2. 打开 `vision.js`，填 API Key、模型名（如用非千问服务还需改 API 地址）
 3. 把 `vision.md` 放到 `.claude/skills/`
 4. 把 `CLAUDE.md` 放到项目根目录
-
-### cyberboss 用户
-
-让 Claude Code 在 cyberboss 目录下读 `cyberboss-setup.md`，自动改好。
 
 ### 文件说明
 
