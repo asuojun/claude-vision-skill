@@ -67,7 +67,7 @@ git clone https://github.com/asuojun/claude-vision-skill.git
 
 > 读一下 claude-vision-skill/README.md，帮我配置识图
 
-**方式二**：直接发 GitHub 链接（仅限使用 Claude 原生模型时可用；DeepSeek 等第三方模型可能无法访问 GitHub）：
+**方式二**：直接发 GitHub 链接（DeepSeek 等第三方模型可能无法访问 GitHub）：
 
 > 按 https://github.com/asuojun/claude-vision-skill 的 README 帮我配置识图
 
