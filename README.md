@@ -57,9 +57,19 @@
 
 ### 自动配置
 
-把这个 GitHub 链接发给 Claude Code，说一句：
+**方式一（推荐）**：先把仓库 clone 到本地，然后告诉 Claude Code 本地路径：
 
-> 按这个 README 帮我配置识图
+```
+git clone https://github.com/asuojun/claude-vision-skill.git
+```
+
+然后在 Claude Code 里说：
+
+> 读一下 claude-vision-skill/README.md，帮我配置识图
+
+**方式二**：直接发 GitHub 链接（仅限使用 Claude 原生模型时可用；DeepSeek 等第三方模型可能无法访问 GitHub）：
+
+> 按 https://github.com/asuojun/claude-vision-skill 的 README 帮我配置识图
 
 AI 会问你用什么服务、Key 是什么，然后自动配好。
 
