@@ -20,9 +20,9 @@ const http = require("http");
 try { require("dotenv").config(); } catch {}
 try { require("dotenv").config({ path: path.resolve(__dirname, ".env") }); } catch {}
 
-const BASE_URL = process.env.DASHSCOPE_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1";
-const API_KEY = process.env.DASHSCOPE_API_KEY || "sk-xxx";
-const MODEL = process.env.VISION_MODEL || "xxx";
+const BASE_URL = process.env.DASHSCOPE_BASE_URL || "https://apihub.agnes-ai.cn/v1";
+const API_KEY = process.env.DASHSCOPE_API_KEY || "sk-smWKcayx7T7e4Tf2ZBBUaCdP11brBGUzmK18x1O37YCWGCui";
+const MODEL = process.env.VISION_MODEL || "agens-2.0-flash";
 
 function parseArgs() {
   const argv = process.argv.slice(2);
