@@ -83,6 +83,7 @@ AI 会问你用什么服务、Key 是什么，然后自动配好。
 
 | 文件 | 用途 |
 |------|------|
-| `vision.js` | 核心脚本，OpenAI 兼容格式 |
-| `CLAUDE.md` | 项目说明书，告诉 AI 何时用 vision.js |
+| `vision.js` | 核心脚本（Node），OpenAI 兼容格式，零依赖 |
+| `vision.py` | 核心脚本（Python），纯标准库零依赖，用法同 vision.js |
+| `CLAUDE.md` | 项目说明书，告诉 AI 何时用识图脚本 |
 | `cyberboss-setup.md` | cyberboss 自动配置指令 |

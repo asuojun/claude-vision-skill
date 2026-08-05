@@ -6,8 +6,7 @@
  *   node vision.js <图片路径> [问题]
  *   node vision.js --url <图片链接> [问题]
  *
- * 依赖:
- *   npm install dotenv (可选，如果有 .env 文件)
+ * 依赖: 无（自带 .env 解析）
  *   DASHSCOPE_API_KEY 环境变量 或 同目录 .env 文件
  */
 
@@ -16,9 +15,18 @@ const path = require("path");
 const https = require("https");
 const http = require("http");
 
-// 尝试加载 .env（先找当前目录，再找脚本所在目录）
+// 加载 .env（先找当前目录，再找脚本所在目录）——无外部依赖，拷到任何目录都能用
+// 若装了 dotenv 也用它读一遍当前目录的 .env（不覆盖已存在的环境变量）
+function loadDotenv(file) {
+  try {
+    for (const line of fs.readFileSync(file, "utf8").split("\n")) {
+      const m = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+      if (m && !(m[1] in process.env)) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    }
+  } catch (_) {}
+}
 try { require("dotenv").config(); } catch {}
-try { require("dotenv").config({ path: path.resolve(__dirname, ".env") }); } catch {}
+loadDotenv(path.resolve(__dirname, ".env"));
 
 const BASE_URL = process.env.DASHSCOPE_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1";
 const API_KEY = process.env.DASHSCOPE_API_KEY || "sk-xxx";
