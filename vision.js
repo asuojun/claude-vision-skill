@@ -24,8 +24,8 @@ try { require("dotenv").config(); } catch {}
 try { require("dotenv").config({ path: path.resolve(__dirname, ".env") }); } catch {}
 
 const BASE_URL = process.env.DASHSCOPE_BASE_URL || "https://dashscope.aliyuncs.com/compatible-mode/v1";
-const API_KEY = process.env.DASHSCOPE_API_KEY || "sk-xxx";
-const MODEL = process.env.VISION_MODEL || "xxx";
+const API_KEY = process.env.DASHSCOPE_API_KEY || "";
+const MODEL = process.env.VISION_MODEL || "";
 
 function parseArgs() {
   const argv = process.argv.slice(2);
@@ -137,8 +137,11 @@ function request(payload) {
 }
 
 async function main() {
-  if (!API_KEY) {
-    console.error("请设置 DASHSCOPE_API_KEY 环境变量或在 .env 文件中配置。");
+  const missing = [];
+  if (!API_KEY) missing.push("DASHSCOPE_API_KEY");
+  if (!MODEL) missing.push("VISION_MODEL");
+  if (missing.length) {
+    console.error(`请设置以下配置：${missing.join(", ")}（环境变量或 .env 文件）`);
     console.error("获取 Key: https://bailian.console.aliyun.com/");
     process.exit(1);
   }
